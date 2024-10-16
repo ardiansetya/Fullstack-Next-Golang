@@ -1,0 +1,37 @@
+### GET ALL
+GET http://localhost:3001/api/products
+Accept: application/json
+
+### GET BYID
+GET http://localhost:3001/api/products/4
+Accept: application/json
+
+### CREATE
+POST http://localhost:3001/api/products/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Blue AtlasEsss",
+  "description": " the signature fragrance from personal care brand Blu Atlas is inspired by the sights, scents, and sensations of Bali’s coastal jungles",
+  "price": 999,
+  "category": "parfume",
+  "stock": 10
+}
+
+### UPDATE
+PUT http://localhost:3001/api/products/12
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "RTX 4080Tiiiiiiiiissssssssssssswwwwwww",
+  "description": "graphic card for gamming experience",
+  "price": 499,
+  "category": "HardWare",
+  "stock": 22
+}
+
+### DELETE
+DELETE http://localhost:3001/api/products/12
+Accept: application/json

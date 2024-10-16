@@ -1,0 +1,279 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Title",
+    "description": "Title",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "security": [{
+          "ProductAuth": []
+        }],
+        "tags": ["Product API"],
+        "description": "list all products",
+        "responses": {
+          "200": {
+            "description": "Success get all products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [{
+          "ProductAuth": []
+        }],
+        "tags": ["Product API"],
+        "description": "Create new products",
+        "summary": "Create new products",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateProduct"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Create new products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{productId}": {
+      "get": {
+        "security": [{
+          "ProductAuth": []
+        }],
+        "tags": ["Product API"],
+        "description": "get products by Id",
+        "summary": "get products by Id",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success Create new products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "security": [{
+          "ProductAuth": []
+        }],
+        "tags": ["Product API"],
+        "description": "update products by Id",
+        "summary": "update products by Id",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "Product ID"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateProduct"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [{
+          "ProductAuth": []
+        }],
+        "tags": ["Product API"],
+        "description": "DELETE products by Id",
+        "summary": "DELETE products by Id",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DELETE products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  },
+  "components": {
+      "securitySchemes": {
+        "ProductAuth": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "X-API-Key",
+          "description": "Authentication for Product API"
+        }
+      },
+      "schemas": {
+        "CreateOrUpdateProduct": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "price": {
+              "type": "number",
+              "format": "double"
+            },
+            "category": {
+              "type": "string"
+            },
+            "stock": {
+              "type": "number"
+            }
+          }
+        },
+        "Product": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "price": {
+              "type": "number",
+              "format": "double"
+            },
+            "category": {
+              "type": "string"
+            },
+            "stock": {
+              "type": "number"
+            }
+          }
+        }
+      }
+  }
+}

@@ -1,0 +1,19 @@
+===> API ACCESS <===
+api/products GET <-- all product
+api/products POST <-- create product
+api/products/{id} GET <-- find product by id
+api/products/{id} PUT <-- Update product by id
+api/products/{id} DELETE <-- delete product by id
+
+name db -> go_rest_api, table products
+
+DOCUMENTATION folder:->
+1. domain / entity --> representation data for database
+2. repository --> data access layer ke domain
+3. Service --> busies logic
+4. web --> representasi data request dan response ke client
+5. controller -->
+
+so flow nya sebenrar nya
+
+domain -> repository(SQL) -> web (format data output) -> service(bisnis logic) and execute SQl -> controller ->
