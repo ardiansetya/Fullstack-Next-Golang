@@ -1,0 +1,45 @@
+services:
+  mysql-data:
+    container_name: mysql-data
+    image: mysql:latest
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: 'api_product'
+      MYSQL_USER: 'korie'
+      MYSQL_PASSWORD: 'korie123'
+      MYSQL_ROOT_PASSWORD: 'korie123'
+    volumes:
+      - mysql-product:/var/lib/mysql # Menggunakan named volume untuk persistensi data
+
+  api-bg:
+    container_name: api-bg
+    image: koriebruh/apitest
+    restart: always
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql-data
+
+  api-bg2:
+      container_name: api-bg2
+      image: koriebruh/apitest
+      restart: always
+      ports:
+        - "8082:8080"
+      depends_on:
+        - mysql-data
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-bg
+      - api-bg2
+
+volumes:
+  mysql-product:
